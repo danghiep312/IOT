@@ -19,6 +19,8 @@ const Page = ({publish, subscriber, payload}) => {
   const [isFanOn, setIsFanOn] = useState(false);
   const [lmsg, setLedControlMsg] = useState("true")
   const [fmsg, setFanControlMsg] = useState("true")
+    const [actionLedInfo, setActionLedInfo] = useState({})
+    const [actionFanInfo, setActionFanInfo] = useState({})
 
   const [dataChart, setData] = useState({
     temperature: [31, 20, 12, 45, 22, 30, 27, 32, 1, 17, 7, 39, 37, 15, 16, 41, 5, 20, 29, 15, 33, 9, 45, 13, 28, 17, 11, 7, 2, 38],
@@ -55,11 +57,27 @@ const Page = ({publish, subscriber, payload}) => {
   //   return () => clearInterval(interval);
   // }, [dataChart]);
 
+useEffect(() => {
+    fetch("http://localhost:8080/actioncount?device=led")
+        .then(response => response.json())
+        .then(data => {
+            setActionLedInfo(data)
+        })
+        .catch(err => console.log(err))
+
+    fetch("http://localhost:8080/actioncount?device=fan")
+        .then(response => response.json())
+        .then(data => {
+            setActionFanInfo(data)
+        })
+        .catch(err => console.log(err))
+}, [actionFanInfo, actionLedInfo]);
+
   useEffect(() => {
-    if (payload.topic === 'messages/datasensor')
+    if (payload.topic === 'messages/sensordata')
     {
         let o = JSON.parse(payload.message)
-        updateDataChart(o.temperature, o.humidity, o.light)
+        updateDataChart(o.temp, o.humid, o.lux)
     }
   }, [payload]);
 
@@ -74,6 +92,7 @@ const Page = ({publish, subscriber, payload}) => {
         updatedData.light.push(light)
         updatedData.light.shift()
 
+        // const dust = getRandomInt(1, 101);
         // updatedData.dust.push(dust)
         // updatedData.dust.shift()
 
@@ -111,19 +130,15 @@ const Page = ({publish, subscriber, payload}) => {
 
         </div>
         <div className="page-chucnang">
-          {/*<Temperature payload={payload} />*/}
-          {/*<Humidity payload={payload} />*/}
-          {/*<Light/>*/}
           <Temperature temp={dataChart.temperature[dataChart.temperature.length - 1]}/>
           <Humidity hum={dataChart.humidity[dataChart.humidity.length - 1]}/>
           <Light light={dataChart.light[dataChart.light.length - 1]}/>
-          <Dust dus={dataChart.dust[dataChart.light.length - 1]} publish={publish}/>
-          {/*<Dust payload={payload}/>*/}
+          {/*<Dust dus={dataChart.dust[dataChart.light.length - 1]} publish={publish}/>*/}
         </div>
         <div className="page-btn">
           <div className="page-bieudo">
             <Charts data={dataChart}/>
-            <ChartDust data={dataChart}/>
+            {/*<ChartDust data={dataChart}/>*/}
           </div>
           <div className="page-btn-chucnang">
             <div className="page-btn-den">
@@ -133,6 +148,10 @@ const Page = ({publish, subscriber, payload}) => {
                 <button className={`light-btn ${isLightOn ? 'on' : 'off'}`} onClick={toggleLight}>
                   <span className="light-icon"></span>
                 </button>
+                  <br/>
+                  <div>
+                      Led on: {actionLedInfo.oncnt}, Led off: { actionLedInfo.offcnt}
+                  </div>
               </div>
             </div>
 
@@ -143,6 +162,10 @@ const Page = ({publish, subscriber, payload}) => {
                 <button className={`light-btn ${isFanOn ? 'on' : 'off'}`} onClick={toggleFan}>
                   <span className="light-icon"></span>
                 </button>
+                  <br/>
+                  <div>
+                      Fan on: {actionFanInfo.oncnt}, Fan off: { actionFanInfo.offcnt}
+                  </div>
               </div>
             </div>
           </div>

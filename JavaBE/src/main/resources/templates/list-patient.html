@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Patient</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<h1>List Patients</h1>
+		</div>
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>DOB</th>
+					<th>Disease</th>
+					<th>Vaccinated</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="patient: ${patients}">
+					<td th:text="${patient.id}"></td>
+					<td th:text="${patient.name}"></td>
+					<td th:text="${patient.dob}"></td>
+					<td th:text="${patient.disease}"></td>
+					<td> <input type="checkbox" th:checked = "${patient.vaccinated}"></td>
+					<td><a th:href="@{patient/{id}(id = ${patient.id})}"
+						class="btn btn-success">Edit</a>
+					 	<a th:href="@{delete/{id}(id = ${patient.id})}" class="btn btn-danger"
+							th:onclick="if(!(confirm('Do you want to delete patient ?') )) return false" >
+							Delete</a>
+				</tr>
+			</tbody>
+		</table>
+		<a th:href="@{patient/{id}(id = -1)}" class="btn btn-success col-lg-12">New
+			Patient</a>
+	</div>
+</body>
+</html>

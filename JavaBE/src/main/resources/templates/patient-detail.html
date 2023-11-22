@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
+<title>Pet Detail</title>
+</head>
+<body>
+	<div class="row">
+	<h1>Pet</h1>
+	</div>
+	<form th:object="${patient}" th:action="@{/patient/save/{id}(id=${patient.id})}" th:method="${id} <= 0 ? POST : PUT">
+		ID: <input type="number" name="id" th:value = "${patient.id}" disabled="disabled"> <br>
+		Name: <input type="text" name="name" th:value = "${patient.name}" th:errorClass="is-invalid"><br>
+			<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span><br>
+		DOB: <input type="date" name="dob" th:value = "${patient.dob}" th:errorClass="is-invalid" required="required"><br>
+		Disease: <input type="text" name="disease" th:value = "${patient.disease}"><br>
+		Vaccinated : <input type="checkbox" name="vaccinated" th:checked = "${patient.vaccinated}" ><br>
+		<input type="submit" value="Save">
+		<span th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="text-danger"></span><br>
+	</form>
+</body>
+</html>

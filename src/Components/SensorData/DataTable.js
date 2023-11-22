@@ -36,16 +36,16 @@ const columns: GridColDef[] = [
         align: "center",
         disableColumnMenu: 'true'
     },
-    {
-        field: 'dust',
-        headerName: 'Dust',
-        headerAlign: 'center',
-        type: 'number',
-        flex: 1,
-        minWidth: 70,
-        align: "center",
-        disableColumnMenu: 'true'
-    },
+    // {
+    //     field: 'dust',
+    //     headerName: 'Dust',
+    //     headerAlign: 'center',
+    //     type: 'number',
+    //     flex: 1,
+    //     minWidth: 70,
+    //     align: "center",
+    //     disableColumnMenu: 'true'
+    // },
     {
         field: 'time',
         headerName: 'Time',
@@ -194,14 +194,14 @@ export default function DataTable() {
                     onMaxChange={(value) => setSearchText({...searchText, lightMax: value})}
                     inputType="number"
                 />
-                <Filter
-                    title="Dust"
-                    minValue={searchText.dustMin}
-                    onMinChange={(value) => setSearchText({...searchText, dustMin: value})}
-                    maxValue={searchText.dustMax}
-                    onMaxChange={(value) => setSearchText({...searchText, dustMax: value})}
-                    inputType="number"
-                />
+                {/*<Filter*/}
+                {/*    title="Dust"*/}
+                {/*    minValue={searchText.dustMin}*/}
+                {/*    onMinChange={(value) => setSearchText({...searchText, dustMin: value})}*/}
+                {/*    maxValue={searchText.dustMax}*/}
+                {/*    onMaxChange={(value) => setSearchText({...searchText, dustMax: value})}*/}
+                {/*    inputType="number"*/}
+                {/*/>*/}
                 <Filter
                     title="Time"
                     minValue={searchText.timeMin}

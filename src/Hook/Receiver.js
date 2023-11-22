@@ -49,6 +49,8 @@ const Receiver = ({payload}) => {
         >
             <List
                 size="small"
+
+
                 bordered
                 dataSource={messages}
                 renderItem={renderListItem}

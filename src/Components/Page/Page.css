@@ -21,20 +21,21 @@
 
 .page-bieudo {
   /*display: inline;*/
-  /*width: 64.3%;*/
-  width: 73.5%;
+  width: 64.3%;
+  /*width: 73.5%;*/
   display: flex;
   background-color: #f2e9e8;
   transform: translateZ(50px);
   /* Dịch phần tử lên theo trục Z */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   /* Đổ bóng */
-  margin: 10px 10px;
+  /*margin: 10px 10px;*/
+  margin: 10px 20px;
 }
 
 .page-btn-chucnang {
-  /*width: 33.2%;*/
-  width: 25%;
+  width: 33.2%;
+  /*width: 25%;*/
   /*margin-left: 10px;*/
 }
 
