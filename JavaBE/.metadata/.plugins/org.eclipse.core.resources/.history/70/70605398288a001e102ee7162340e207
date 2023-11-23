@@ -30,13 +30,13 @@ public class ActionDao {
 			
 			ps.setString(1, device);
 			ps.setString(2, "on");
-			//System.out.println(ps.toString());
+			System.out.println(ps.toString());
 			ResultSet rs = ps.executeQuery();
 			rs.next();
 			int onCount = rs.getInt("cnt");
 			
 			ps.setString(2, "off");
-			//System.out.println(ps.toString());
+			System.out.println(ps.toString());
 			rs = ps.executeQuery();
 			rs.next();
 			int offCount = rs.getInt("cnt");
@@ -45,7 +45,7 @@ public class ActionDao {
 			json.put("device", device);
 			json.put("oncnt", onCount);
 			json.put("offcnt", offCount);
-			//System.out.println(json.toString());
+			System.out.println(json.toString());
 			res = json.toString();
 		}
 		catch (Exception e) {

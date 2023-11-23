@@ -34,7 +34,7 @@ public class ActionController {
 	
 	@GetMapping("/actioncount")
 	public String getCountAction(@RequestParam String device) {
-		//System.out.println("count " + device);
+		System.out.println("count " + device);
 		return actionDao.getCountOfAction(device);
 		
 	}

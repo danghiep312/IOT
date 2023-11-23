@@ -77,7 +77,7 @@ useEffect(() => {
     if (payload.topic === 'messages/sensordata')
     {
         let o = JSON.parse(payload.message)
-        updateDataChart(o.temp, o.humid, o.lux)
+        updateDataChart(o.temperature, o.humidity, o.lux)
     }
   }, [payload]);
 
